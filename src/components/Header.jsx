@@ -20,7 +20,7 @@ const Header = (props) => {
                     angleCenter={{ x: 0, y: 1 }}
                     angle={45}
                 >
-                    <Entypo name="calendar" size={24} color="white" />
+                    <Entypo name={props.icon} size={20} color="white" />
                 </LinearGradient>
 
 
@@ -56,12 +56,14 @@ const styles = StyleSheet.create({
     dateTxt: {
         fontSize: 15,
         color: "grey",
-        marginLeft: 5
+        marginLeft: 5,
+        top: 2,
+        fontWeight: "bold"
     },
     icon: {
-        width: 38,
-        height: 38,
-        borderRadius: 19,
+        width: 40,
+        height: 40,
+        borderRadius: 20,
         backgroundColor: "#ff6896",
         marginRight: 10,
         justifyContent: "center",

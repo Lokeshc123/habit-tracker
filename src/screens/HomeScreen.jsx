@@ -17,7 +17,7 @@ const HomeScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Header headerTxt="Today" dateTxt={formattedDate} />
+                <Header headerTxt="Today" dateTxt={formattedDate} icon="calendar" />
             </View>
             <View style={styles.days}>
                 <FlatList
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     },
     days: {
         width: "100%",
-        height: "8%",
+        height: "9%",
 
         padding: 5,
         marginTop: 10,
