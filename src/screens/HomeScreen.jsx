@@ -9,7 +9,7 @@ const HomeScreen = () => {
     const currentDate = new Date();
     const day = currentDate.getDate();
     const month = currentDate.toLocaleString('default', { month: 'short' });
-    const days = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']
+    const days = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU']
     const formattedDate = `${day}${getOrdinalSuffix(day)} ${month}`;
     const task = ['Coffee', 'Read', 'Workout', 'Study', 'Sleep', 'Run', 'Code', 'swim', 'eat', 'drink'];
 
