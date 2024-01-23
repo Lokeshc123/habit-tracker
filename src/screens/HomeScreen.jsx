@@ -14,6 +14,7 @@ const HomeScreen = () => {
     const task = ['Coffee', 'Read', 'Workout', 'Study', 'Sleep', 'Run', 'Code', 'swim', 'eat', 'drink'];
 
 
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>

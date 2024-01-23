@@ -14,8 +14,8 @@ const Header = (props) => {
                 <LinearGradient
                     colors={['#F8BBD0', '#FF4081', '#FFEB3B']}
                     style={styles.icon}
-                    start={{ x: 0, y: 1 }}
-                    end={{ x: 1, y: 0 }}
+                    // start={{ x: 0, y: 1 }}
+                    // end={{ x: 1, y: 0 }}
                     useAngle={true}
                     angleCenter={{ x: 0, y: 1 }}
                     angle={45}

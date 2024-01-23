@@ -14,9 +14,9 @@ const Tasks = ({ task }) => {
                     <LinearGradient
                         colors={['#F8BBD0', '#FF4081', '#FFEB3B']}
                         style={styles.gradient}
-                        start={{ x: 0, y: 1 }}
-                        end={{ x: 1, y: 0 }}
-                        useAngle={true}
+                        // start={{ x: 0, y: 1 }}
+                        // end={{ x: 1, y: 0 }}
+
                         angleCenter={{ x: 0, y: 1 }}
                         angle={45}
                     >
