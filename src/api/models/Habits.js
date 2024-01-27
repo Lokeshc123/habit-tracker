@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const habitSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -24,6 +23,14 @@ const habitSchema = new mongoose.Schema({
   LongestStreak: {
     type: Number,
     required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  lastUpdated: {
+    type: Date,
+    default: Date.now,
   },
 });
 

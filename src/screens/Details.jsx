@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../components/Header';
 import { LineChart } from 'react-native-wagmi-charts';
 import tasks from '../data/Data';
 import OverView from '../components/OverView';
+import { UserType } from '../context/UserContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwt_decode from "jwt-decode"
+import axios from 'axios';
 const Details = () => {
+    const [habit, setHabit] = useState([]);
+    const { userId, setUserId, completedTasks } = useContext(UserType);
     const data = [
         { day: 'Mo', value: 10 },
         { day: 'Tu', value: 20 },
@@ -15,6 +21,34 @@ const Details = () => {
         { day: 'Sa', value: 60 },
         { day: 'Su', value: 70 },
     ];
+    useEffect(() => {
+        const fetchHabit = async () => {
+            try {
+                const token = await AsyncStorage.getItem("authToken");
+                const decodedToken = jwt_decode(token);
+                const user = decodedToken.userId;
+                setUserId(user);
+                axios.get(`http://10.35.138.26:5000/user/${user}/habits`)
+                    .then((res) => {
+                        console.log(res.data.habits);
+                        setHabit(res.data.habits);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+
+
+
+            } catch (err) {
+                if (err.response && err.response.data) {
+                    console.log(err.response.data);
+                } else {
+                    console.log(err.message); // Or handle the error in another way
+                }
+            }
+        };
+        fetchHabit();
+    }, [completedTasks, habit]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -41,9 +75,9 @@ const Details = () => {
             </View>
             <View style={styles.overview}>
                 <FlatList
-                    data={tasks}
+                    data={habit}
                     renderItem={({ item }) => <OverView task={item} />}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item._id}
                     style={{ flex: 1 }}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ paddingBottom: 20 }}

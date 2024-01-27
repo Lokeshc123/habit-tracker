@@ -3,7 +3,19 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Info from '../components/Info'
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 const Profile = () => {
+    const navigation = useNavigation();
+    const logOut = async () => {
+        try {
+            await AsyncStorage.removeItem('authToken');
+            navigation.replace("LoginScreen");
+            // Additional logout logic here
+        } catch (error) {
+            console.log('Error deleting authToken from AsyncStorage:', error);
+        }
+    }
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.profile}>
@@ -19,7 +31,7 @@ const Profile = () => {
                         <Info main_txt="About me" sub_txt="Reach us,Share App" icon="share" />
                     </View>
                 </View>
-                <TouchableOpacity style={styles.btn}>
+                <TouchableOpacity style={styles.btn} onPress={logOut}>
                     <Text style={{ fontSize: 20, fontWeight: "bold", color: "#fff" }}>Log Out</Text>
                 </TouchableOpacity>
             </View>

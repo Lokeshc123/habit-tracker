@@ -14,10 +14,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  habits: {
-    type: Array,
-    default: [],
-  },
+  habits: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Habit",
+    },
+  ],
 });
 
 const User = mongoose.model("User", userSchema);

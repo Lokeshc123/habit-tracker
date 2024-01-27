@@ -1,13 +1,53 @@
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 const LoginScreen = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigation = useNavigation();
+    useEffect(() => {
+        const checkLogin = async () => {
+            try {
+                const token = await AsyncStorage.getItem('authToken');
+                if (token) {
+                    navigation.replace("Root")
+                }
+                else {
+
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        checkLogin();
+    }
+        , []);
+    const handleLogin = () => {
+        const user = {
+            email: email,
+            password: password,
+        }
+
+        axios.post('http://10.35.138.26:5000/login', user).then((res) => {
+            console.log(res.data);
+            const token = res.data.token;
+            AsyncStorage.setItem('authToken', token);
+
+            setEmail('')
+            setPassword('')
+            navigation.replace("Root")
+
+        }).catch((err) => {
+            console.log(err);
+            Alert.alert('Error', 'Login Failed')
+        })
+
+
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -38,7 +78,7 @@ const LoginScreen = () => {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={handleLogin}>
                     <Text>Login</Text>
                 </TouchableOpacity>
             </View>

@@ -23,6 +23,11 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="Root"
           component={BottomTabs}
           options={{ headerShown: false }}
